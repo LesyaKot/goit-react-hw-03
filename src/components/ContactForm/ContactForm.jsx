@@ -2,6 +2,7 @@ import { useId } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { nanoid } from "nanoid";
 import * as yup from "yup";
+import css from './ContactForm.module.css'
 
 const initialValues = {
   name: "",
@@ -37,16 +38,16 @@ export default function ContactForm({ onAdd }) {
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >
-      <Form>
+      <Form className={css.form}>
         <label htmlFor={name}>Name</label>
-        <Field type="text" name="name" id={name} />
+        <Field className={css.name} type="text" name="name" id={name} />
         <ErrorMessage name="name" component="div" />
 
         <label htmlFor={number}>Number</label>
-        <Field type="text" name="number" id={number} />
+        <Field className={css.number} type="text" name="number" id={number} />
         <ErrorMessage name="number" component="div" />
 
-        <button type="submit">Add contact</button>
+        <button className={css.btn} type="submit">Add contact</button>
       </Form>
     </Formik>
   );
