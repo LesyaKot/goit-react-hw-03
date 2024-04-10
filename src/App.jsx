@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-// import { Formik } from 'formik';
-
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactForm from "./components/ContactForm/ContactForm";
 import ContactList from "./components/ContactList/ContactList";
@@ -18,16 +16,24 @@ function App() {
   useEffect(() => {
     const savedContacts = JSON.parse(localStorage.getItem("contacts"));
     if (savedContacts) {
-      setContacts(savedContacts);
+      setContacts(savedContacts, [contacts]);
     }
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
+    
+  // useEffect(() => {
+  //   localStorage.setItem("contacts", JSON.stringify(contacts));
+  // }, [contacts]);
+
+  
+  // const addContact = (newContact) => {
+  //   setContacts((prevContacts) => [...prevContacts, newContact]);
+  // };
 
   const addContact = (newContact) => {
-    setContacts((prevContacts) => [...prevContacts, newContact]);
+    const updatedContacts = [...contacts, newContact];
+    setContacts(updatedContacts);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts));
   };
 
   const deleteContact = (contactId) => {
