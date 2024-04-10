@@ -13,18 +13,16 @@ function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
 
-  useEffect(() => {
+    useEffect(() => {
     const savedContacts = JSON.parse(localStorage.getItem("contacts"));
     if (savedContacts) {
-      setContacts(savedContacts, [contacts]);
+      setContacts(savedContacts);
     }
   }, []);
-
     
   // useEffect(() => {
   //   localStorage.setItem("contacts", JSON.stringify(contacts));
   // }, [contacts]);
-
   
   // const addContact = (newContact) => {
   //   setContacts((prevContacts) => [...prevContacts, newContact]);
@@ -36,12 +34,20 @@ function App() {
     localStorage.setItem("contacts", JSON.stringify(updatedContacts));
   };
 
+  // const deleteContact = (contactId) => {
+  //   setContacts((prevContacts) =>
+  //     prevContacts.filter((contact) => contact.id !== contactId)
+  //   );
+  // };
+
   const deleteContact = (contactId) => {
     setContacts((prevContacts) =>
       prevContacts.filter((contact) => contact.id !== contactId)
     );
+    const updatedContacts = contacts.filter((contact) => contact.id !== contactId);
+    localStorage.setItem("contacts", JSON.stringify(updatedContacts));
   };
-
+  
   const visibleContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
